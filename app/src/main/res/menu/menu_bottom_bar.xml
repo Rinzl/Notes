@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionLeftArrow"
+        android:title="@string/go_to_left"
+        android:icon="@drawable/ic_arrow_back_24dp"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/actionRightArrow"
+        android:title="@string/go_to_right"
+        android:icon="@drawable/ic_arrow_forward_24dp"
+        app:showAsAction="ifRoom" />
+</menu>

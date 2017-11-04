@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="no_note">No note</string>
+    <string name="title">Title</string>
+    <string name="brief_content_of_note">Brief content of note</string>
+    <string name="date">date</string>
+    <string name="create_new_note">New Note</string>
+    <string name="content">content</string>
+    <string name="save">save</string>
+    <string name="change_color">Change color</string>
+    <string name="add_picture">Add picture</string>
+    <string name="go_to_right">Go to right</string>
+    <string name="go_to_left">Go to left</string>
+    <string name="spinner_date">Date</string>
+    <string name="cancel">cancel</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select time</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionAddPicture"
+        android:title="@string/add_picture"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_camera_24dp"/>
+    <item
+        android:id="@+id/actionChangeColor"
+        android:title="@string/change_color"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_color_lens_24dp"/>
+    <item
+        android:id="@+id/actionSave"
+        android:title="@string/save"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_check_24dp"/>
+    <item
+        android:id="@+id/actionDelete"
+        android:title="Delete"
+        android:icon="@drawable/ic_delete_24dp"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/actionCreateNote"
+        android:title="@string/create_new_note"
+        app:showAsAction="never"/>
+</menu>
