@@ -175,6 +175,12 @@ public class NoteActivity extends AppCompatActivity {
                 setResult(RESULT_OK,deleteIntent);
                 finish();
             }
+            case R.id.actionShare :
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,etNoteContent.getText().toString());
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent,"Send to"));
 
         }
         return super.onOptionsItemSelected(item);

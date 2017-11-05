@@ -26,4 +26,8 @@
         android:id="@+id/actionCreateNote"
         android:title="@string/create_new_note"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/actionShare"
+        android:title="Share"
+        app:showAsAction="never"/>
 </menu>
