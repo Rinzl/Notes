@@ -48,6 +48,7 @@ public class Note implements Parcelable {
     }
 
     protected Note(Parcel in) {
+        id = in.readInt();
         noteTitle = in.readString();
         noteContent = in.readString();
         date = in.readString();
@@ -169,6 +170,7 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(noteTitle);
         dest.writeString(noteContent);
         dest.writeString(date);

@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +42,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateNoteActivity extends AppCompatActivity {
     public static final int TAKE_PICTURE_REQUEST = 123;
@@ -125,13 +127,22 @@ public class CreateNoteActivity extends AppCompatActivity {
                     note.setTimeAlarm(tvTime.getText().toString());
                     String[] temp = note.getDateAlarm().split("/");
                     String[] temp1 = note.getTimeAlarm().split(":");
+                    Calendar c = Calendar.getInstance();
+                    c.setTimeInMillis(System.currentTimeMillis());
+                    Log.d("OKE", String.valueOf(c.getTimeInMillis()));
                     int year = Integer.parseInt(temp[2]);
                     int month = Integer.parseInt(temp[1]);
                     int day = Integer.parseInt(temp[0]);
                     int h = Integer.parseInt(temp1[0]), m = Integer.parseInt(temp1[1]);
-                    Calendar c = Calendar.getInstance();
-                    c.set(year,month,day,h,m);
-                    scheduleNotification(getNotification("TEST"),c.getTimeInMillis());
+                    c.set(Calendar.YEAR,year);
+                    c.set(Calendar.MONTH,month-1);
+                    c.set(Calendar.DAY_OF_MONTH,day);
+                    c.set(Calendar.HOUR_OF_DAY,h);
+                    c.set(Calendar.MINUTE,m);
+                    c.set(Calendar.SECOND,0);
+                    Log.d("OKE", String.valueOf(c.getTimeInMillis()));
+                    Log.d("OKE", String.valueOf(System.currentTimeMillis()));
+                    scheduleNotification(note,c.getTimeInMillis());
                 }
                 int id = fromMain.getIntExtra("id",-1)+1;
                 note.setId(id);
@@ -218,7 +229,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             }
         };
         Calendar calendar = Calendar.getInstance();
-        h = calendar.get(Calendar.HOUR);
+        h = calendar.get(Calendar.HOUR_OF_DAY);
         m = calendar.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,timeSet,h,m,true);
         timePickerDialog.show();
@@ -244,21 +255,20 @@ public class CreateNoteActivity extends AppCompatActivity {
                 }
         }
     }
-    private void scheduleNotification(Notification notification, long time) {
+    private void scheduleNotification(Note note, long time) {
 
         Intent notificationIntent = new Intent(this, PushNotification.class);
         notificationIntent.putExtra(PushNotification.NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(PushNotification.NOTIFICATION, notification);
+        notificationIntent.putExtra(PushNotification.NOTIFICATION, note);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+5000, pendingIntent);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,time, pendingIntent);
     }
-    private Notification getNotification(String content) {
-        Notification.Builder builder = new Notification.Builder(this);
-        builder.setContentTitle("Scheduled Notification");
-        builder.setContentText(content);
+    private NotificationCompat.Builder getNotification(Note note) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setContentTitle(note.getNoteTitle());
+        builder.setContentText(note.getBrief());
         builder.setSmallIcon(R.drawable.ic_color_lens_24dp);
-        return builder.build();
+        return builder;
     }
 }
