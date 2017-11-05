@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 Intent i = new Intent(MainActivity.this,NoteActivity.class);
-                i.putParcelableArrayListExtra(KEY_PASS_NOTE,noteList);
+                i.putParcelableArrayListExtra(KEY_PASS_NOTE,databaseManager.getAllNote());
                 i.putExtra(KEY_PASS_POSITION,position);
                 startActivityForResult(i,UPDATE_NOTE_REQUEST);
             }
